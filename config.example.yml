@@ -1,0 +1,15 @@
+# the gitlab instance from which to pull the issues
+gitlab_url: "https://gitlab.example.com"
+# the oauth token that is to be used to authenticate with the gitlab instance
+gitlab_oauth_token: "your_oauth_token"
+# gitlab issues are filtered by a group and assignee id
+gitlab_group_id: 1 # the group id
+gitlab_assignee_id: 1 # the assignee id
+# amount of closed issues that the todoist items are compared against in order to complete a task
+# increase this value if the script does not run very often
+gitlab_check_closed_issues_amount: 20
+# the todoist api key for the account to synchronize with
+todoist_api_key: 'your_todoist_api_key'
+# the todoist project id of the project in which the task should be created, updated & closed
+todoist_project_id: 1234567891
+                    
