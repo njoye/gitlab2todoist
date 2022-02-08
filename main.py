@@ -13,7 +13,9 @@ with open("config.yml", "r") as stream:
         logging.error("Error while reading configuration")
 
 # Logger Configuration
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(levelname)-4s %(message)s',
+                    level=logging.INFO,
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 logging.info("Logging in to '" + str(config["gitlab_url"]) + "'")
 # Create Gitlab & Todoist Instance & authenticate
