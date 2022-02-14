@@ -5,9 +5,12 @@ gitlab_oauth_token: "your_oauth_token"
 # gitlab issues are filtered by a group and assignee id
 gitlab_group_id: 1 # the group id
 gitlab_assignee_id: 1 # the assignee id
-# amount of closed & all open issues that the todoist items are compared against in order to complete a task
+# amount of closed that the todoist items are compared against in order to complete a task
 # increase this value if the script does not run very often
 gitlab_check_closed_issues_amount: 20
+# amount of open items (of the whole group) that todoist items are compared against in order to 
+# complete a task that is not assigned to the user id anymore
+gitlab_check_open_issues_amount: 80
 # the todoist api key for the account to synchronize with
 todoist_api_key: 'your_todoist_api_key'
 # the todoist project id of the project in which the task should be created, updated & closed

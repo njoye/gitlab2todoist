@@ -41,7 +41,7 @@ logging.info("Checking if any Todoist item is not assigned as issue anymore")
 for item in open_items:
     gitlab_ids = re.findall("\[GitLabID#(\d+)\]", item["description"])
     if len(gitlab_ids) == 1:
-        issues = group.issues.list(id=gitlab_ids[0], page=1, per_page=config["gitlab_check_closed_issues_amount"])
+        issues = group.issues.list(id=gitlab_ids[0], page=1, per_page=config["gitlab_check_open_issues_amount"])
         for issue in issues:
             if int(issue.id) == int(gitlab_ids[0]):
                 still_assigned = False
