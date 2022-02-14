@@ -36,6 +36,23 @@ logging.info("Retrieved " + str(len(open_issues)) + " open issues having assigne
 logging.info("Retrieved " + str(len(closed_issues)) + " closed issues having assignee ID " + str(config["gitlab_assignee_id"]))
 logging.info("Retrieved " + str(len(open_items)) + " open Todoist items.")
 
+# Check all todoist items if the assignee is still in the issue
+logging.info("Checking if any Todoist item is not assigned as issue anymore")
+for item in open_items:
+    gitlab_ids = re.findall("\[GitLabID#(\d+)\]", item["description"])
+    if len(gitlab_ids) == 1:
+        issues = group.issues.list(id=gitlab_ids[0], page=1, per_page=config["gitlab_check_closed_issues_amount"])
+        for issue in issues:
+            if int(issue.id) == int(gitlab_ids[0]):
+                still_assigned = False
+                for assignee in issue.assignees:
+                    if assignee["id"] == config["gitlab_assignee_id"]:
+                       still_assigned = True
+
+                if not still_assigned:
+                    logging.info("Not assigned to issue " + str(issue.id) + " anymore, completing it.")
+                    td.items.complete(item["id"])
+
 # Get closed issues and match them with existing todoist items to close them
 logging.info("Checking if any issue was closed and can be completed in Todoist")
 for issue in closed_issues:
