@@ -46,7 +46,7 @@ for item in open_items:
             if int(issue.id) == int(gitlab_ids[0]):
                 still_assigned = False
                 for assignee in issue.assignees:
-                    if assignee["id"] == config["gitlab_assignee_id"]:
+                    if int(assignee["id"]) == int(config["gitlab_assignee_id"]):
                        still_assigned = True
 
                 if not still_assigned:
